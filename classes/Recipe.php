@@ -58,17 +58,3 @@ class Recipe {
 
 }
 
-$recipe1 = new Recipe();
-$recipe1->source = 'Otti Grant';
-$recipe1->setTitle('Baked beans');
-echo $recipe1->getTitle();
-
-$recipe2 = new Recipe();
-$recipe2->source = 'Akubudike Monday';
-$recipe2->setTitle('coconut Rice');
-$recipe2->addIngredient('bons',2,'oz');
-
-echo $recipe1->displayTitle();
-echo $recipe2->displayTitle();
-var_dump($recipe2->getIngredient());
-
