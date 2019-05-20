@@ -7,6 +7,17 @@ class Recipe {
     public $yield;
     public $tag = array();
     public $source = 'Monday Victor';
+    private $measurement = array(
+        'tsp',
+        'tbsp',
+        'cup',
+        'oz',
+        'lb',
+        'fl oz',
+        'pint',
+        'quart',
+        'gallon'
+    );
 
     public function displayTitle()
     {
@@ -16,6 +27,28 @@ class Recipe {
     public function getTitle()
     {
         return $this->title;
+    }
+
+    public function addIngredient($item, $amount = null, $measure = null)
+    {
+        if($amount != null && !is_float($amount) && !is_int($amount))
+        {
+            exit("The amount must be a float: " .gettype($amount)." {$amount} given.");
+        }
+        if($measure != null && !in_array(strtolower($measure),$this->measurement))
+        {
+            exit('please enter a valid measurement'. implode(', ', $this->measurement));
+        }
+        $this->ingredients[] = array(
+            'item' => ucwords($item),
+            'amount' => $amount,
+            'measure' => strtolower($measure)
+        );
+    }
+
+    public function getIngredient()
+    {
+        return $this->ingredients;
     }
 
     public function setTitle($title)
@@ -33,6 +66,9 @@ echo $recipe1->getTitle();
 $recipe2 = new Recipe();
 $recipe2->source = 'Akubudike Monday';
 $recipe2->setTitle('coconut Rice');
+$recipe2->addIngredient('bons',2,'oz');
 
 echo $recipe1->displayTitle();
 echo $recipe2->displayTitle();
+var_dump($recipe2->getIngredient());
+
